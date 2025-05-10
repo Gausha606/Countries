@@ -1,0 +1,140 @@
+/* CountriesListShimmer.css */
+
+/* --- Parent Card --- */
+.country-card.shimmer-card {
+  /* Light Mode: Aapke App.css mein .country-card ki jo styling hai (width, box-shadow etc.),
+     woh yahan bhi apply hogi. Hum yahan background aur shimmer-specific cheezein add karenge.
+     Agar .country-card mein background var(--elements-color) se aa raha hai, toh woh light mode mein white hoga.
+     Shimmer card ka base thoda alag rakh sakte hain, ya children ko distinct background de sakte hain.
+     Chaliye parent ka background transparent rakhte hain aur children ko color dete hain.
+  */
+  /* background-color: transparent; */ /* Ya ek base color de sakte hain */
+  background-color: var(
+    --elements-color
+  ); /* Matching your light mode card, ya var(--elements-color) */
+  padding: 16px; /* Aapke actual card ki padding ke anusaar */
+  border-radius: 8px; /* Aapke actual card se match karega */
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1); /*Halki shadow, agar zaroori ho*/
+  position: relative; /* Shimmer animation ke liye zaroori */
+  overflow: hidden; /* Shimmer animation ko card ke andar rakhne ke liye zaroori */
+  width: 250px; /* Ya jo bhi aapke actual card ki width hai */
+  min-height: 300px;
+}
+
+/* --- Shimmer Animation (Parent card ke ::after pseudo-element par) --- */
+.country-card.shimmer-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Light Mode Shimmer Gradient */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 20%,
+    /* Bahut halki dark tone, agar white base hai card ka */ rgba(0, 0, 0, 0.06)
+      50%,
+    rgba(0, 0, 0, 0.03) 80%,
+    transparent 100%
+  );
+  /* Agar card ka base light grey (e.g. #e0e0e0) hota, toh white shimmer behtar rehta: */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.25) 80%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer-animation 1.8s infinite linear;
+  z-index: 1; /* Yeh zaroori hai taaki shimmer placeholders ke upar dikhe */
+}
+
+@keyframes shimmer-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* --- Placeholder Child Elements --- */
+/* Common style for all placeholder parts inside the card */
+/* Humne HTML mein children ko 'shimmer' class di hai, uska istemal karenge */
+.country-card.shimmer-card .shimmer {
+  background-color: #e0e0e0; /* Light mode placeholder elements ka color */
+  border-radius: 8px;
+  margin-bottom: 12px; /* Elements ke beech spacing */
+}
+
+/* Specific styles for each placeholder part */
+/* Inki dimensions aapko image (image_6fb530.png) ke anusaar adjust karni hongi */
+.country-card.shimmer-card .country-flag.shimmer {
+  width: 100%;
+  height: 140px; /* Aapke flag image ki height ke anusaar */
+  margin-bottom: 18px;
+}
+
+.country-card.shimmer-card .country-name.shimmer {
+  width: 70%; /* Naam thoda chhota hota hai poori width se */
+  height: 12px; /* Naam thoda mota/bada hota hai */
+  margin-bottom: 16px;
+}
+
+.country-card.shimmer-card .country-population.shimmer,
+.country-card.shimmer-card .country-region.shimmer,
+.country-card.shimmer-card .country-subRegion.shimmer {
+  height: 12px; /* Baaki text lines ki height */
+}
+
+/* Text lines ki width thodi alag-alag kar sakte hain actual content jaisa look dene ke liye */
+.country-card.shimmer-card .country-population.shimmer {
+  width: 85%;
+}
+
+.country-card.shimmer-card .country-region.shimmer {
+  width: 65%;
+}
+
+.country-card.shimmer-card .country-subRegion.shimmer {
+  width: 75%;
+  margin-bottom: 0; /* Aakhri element ke neeche margin nahin */
+}
+
+/* ======================================== */
+/* DARK MODE STYLES                       */
+/* ======================================== */
+
+main.dark .country-card.shimmer-card {
+  /* Dark Mode mein parent card ka background aapke App.css se var(--elements-color) lega */
+  /* Agar woh already .country-card par apply ho raha hai, toh yahan specific override ki shayad zaroorat na ho, */
+  /* ya fir consistent rakhne ke liye explicit likh sakte hain */
+  background-color: hsl(207, 26%, 17%);
+}
+
+main.dark .country-card.shimmer-card .shimmer {
+  /* Dark mode mein placeholder elements ka color */
+  /* Yeh var(--elements-color) se thoda alag hona chahiye taaki dikhe */
+  background-color: hsl(
+    209,
+    23%,
+    28%
+  ); /* Aapke dark card bg (hsl(209,23%,22%)) se thoda halka */
+}
+
+/* Dark mode mein shimmer gradient */
+main.dark .country-card.shimmer-card::after {
+  /* Ek halki safed chamak dark background par achhi lagegi */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 80%,
+    transparent 100%
+  );
+}

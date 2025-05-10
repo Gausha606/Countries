@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+.header-container {
+  padding-inline: 24px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.header-content a {
+  text-decoration-line: none;
+  color: inherit;
+}
+
+.title {
+  font-weight: 800;
+}
+
+.theme-change {
+  cursor: pointer;
+}
+
+main {
+  padding: 24px;
+  min-height: calc(100vh - 73px);
+}
+
+.error {
+  text-align: center;
+}
+
+.country-details-container {
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-top: 32px;
+}
+
+.country-details {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin-top: 32px;
+}
+
+.country-details img {
+  width: 40%;
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  column-gap: 64px;
+  max-height: 180px;
+  flex-wrap: wrap;
+}
+
+.detail-text p {
+  margin: 0;
+}
+
+.back-button {
+  font-weight: 600;
+  color: inherit;
+  text-decoration-line: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  padding: 6px 24px;
+  margin-top: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-button.dark {
+  box-shadow: 0 0 4px 0 rgba(255, 255, 255, 0.3);
+}
+
+.border-countries {
+  margin-top: 48px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+
+.border-countries a {
+  color: inherit;
+  text-decoration-line: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.border-countries a.dark {
+  box-shadow: 0 0 4px 0 rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 950px) {
+  .country-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .detail-text {
+    max-height: unset;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .header-content p {
+    font-size: 12px;
+  }
+
+  .country-details img {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 28px;
+  }
+}

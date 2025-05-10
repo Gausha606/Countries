@@ -1,0 +1,194 @@
+/* CountryDetailShimmer.css */
+
+/* Shimmer Parent Container */
+/* Yeh style aapke CountryDetailShimmer component ke root div (.country-details) par apply hoga */
+.country-details.shimmer-active {
+  /* Layout ko aapke App.css ke .country-details se milane ki koshish */
+  display: flex;
+  align-items: center; /* Placeholders ki height alag ho sakti hai, isliye flex-start behtar ho sakta hai */
+  gap: 64px;
+  margin-top: 116px; /* Aapke App.css ke .country-details se match karta hua */
+
+  position: relative; /* Shimmer animation ke ::after pseudo-element ke liye zaroori */
+  overflow: hidden; /* Shimmer ko container ke andar rakhne ke liye */
+  background-color: transparent; /* Parent ka background transparent rakhte hain */
+}
+
+/* Shimmer Animation Pseudo-Element (Parent par) */
+.country-details.shimmer-active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-100%);
+  animation: shimmer-animation 1.8s infinite linear;
+  z-index: 1; /* Placeholders ke upar shimmer dikhane ke liye */
+}
+
+/* Shimmer Animation Keyframes */
+@keyframes shimmer-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* --- Placeholder Styles --- */
+
+/* Flag Placeholder */
+.country-details.shimmer-active .country-flag {
+  width: 40%; /* Aapke App.css mein img ke width se match karta hua */
+  height: 300px; /* Aap image (image_a5a344.png) ke anusaar adjust kar sakte hain, ya ek fixed height */
+  background-color: #e0e0e0; /* Light mode placeholder color */
+  border-radius: 4px; /* Thoda sa rounded corner */
+}
+
+/* Details Section Container */
+.country-details.shimmer-active .country-detail {
+  flex-grow: 1; /* Bachi hui jagah le lega */
+  display: flex;
+  flex-direction: column; /* Text lines neeche-neeche aayengi */
+  /* Actual component mein detail-text do column mein wrap hota hai max-height ke baad.
+     Hum yahan bhi waisa hi effect laane ki koshish karenge. */
+  row-gap: 10px; /* Placeholders ke beech vertical gap (aapke .detail-text ke row-gap se inspire hokar) */
+  column-gap: 64px; /* Agar wrap hoke column bane toh unke beech gap */
+  max-height: 190px; /* Lagbhag 5-6 lines ke baad wrap karega (line height + gap ke hisaab se adjust karein) */
+  flex-wrap: wrap; /* Wrapping enable karega */
+  align-content: flex-start; /* Wrapped items ko shuru mein align karega */
+}
+
+/* Common styles for all text-based shimmer placeholders */
+.country-details.shimmer-active .country-detail .shimmer {
+  background-color: #e0e0e0; /* Light mode placeholder color */
+  border-radius: 4px;
+  height: 18px; /* Text lines ki height */
+  /* margin-bottom: 10px; /* Pehle se parent (.country-detail) mein gap hai, isliye yeh optional */
+}
+
+/* Specific widths for text placeholders (realism ke liye) */
+.country-details.shimmer-active .country-detail .country-name.shimmer {
+  height: 28px; /* Naam thoda bada hota hai */
+  width: 60%;
+  margin-bottom: 12px; /* Naam ke baad thoda zyada gap */
+}
+
+/* Column 1 ke items (approximate widths) */
+.country-details.shimmer-active .country-detail .country-population.shimmer {
+  width: 70%;
+}
+.country-details.shimmer-active .country-detail .country-region.shimmer {
+  width: 55%;
+}
+.country-details.shimmer-active .country-detail .country-subRegion.shimmer {
+  width: 65%;
+}
+.country-details.shimmer-active .country-detail .country-capital.shimmer {
+  width: 50%;
+}
+
+/* Column 2 ke items (yeh tab banenge jab content wrap hoga) */
+.country-details.shimmer-active
+  .country-detail
+  .country-top-level-domain.shimmer {
+  width: 80%;
+}
+.country-details.shimmer-active .country-detail .country-currencies.shimmer {
+  width: 60%;
+}
+.country-details.shimmer-active .country-detail .country-language.shimmer {
+  width: 75%;
+}
+
+/* --- Light Mode Shimmer Gradient --- */
+/* (Jab body par .dark class NAHIN hai) */
+.country-details.shimmer-active::after {
+  /* Placeholder base color #e0e0e0 ke upar halki white chamak */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    /* Thodi halki chamak */ rgba(255, 255, 255, 0.5) 50%,
+    /* Beech mein zyada chamak */ rgba(255, 255, 255, 0.25) 80%,
+    transparent 100%
+  );
+}
+
+/* --- Dark Mode Styles --- */
+/* (Jab body par .dark class hai) */
+
+/* Dark mode mein placeholder elements ka color */
+main.dark .country-details.shimmer-active .country-flag,
+main.dark .country-details.shimmer-active .country-detail .shimmer {
+  /* Aapka dark mode --elements-color: hsl(208, 23%, 22%) hai.
+     Placeholder usse thoda halka hona chahiye. */
+  background-color: hsl(208, 23%, 28%); /* Thoda halka dark color */
+}
+
+/* Dark mode mein shimmer gradient */
+main.dark .country-details.shimmer-active::after {
+  /* Dark background par bahut halki safed chamak */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    /* Bahut kam opacity wali white chamak */ rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 80%,
+    transparent 100%
+  );
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 950px) {
+  .country-details.shimmer-active {
+    flex-direction: column;
+    align-items: flex-start; /* App.css se match karta hua */
+    gap: 24px; /* Column layout mein gap kam kar sakte hain */
+    margin-top: 16px; /* App.css se match karta hua */
+  }
+
+  .country-details.shimmer-active .country-flag {
+    width: 100%; /* Flag full width lega */
+    max-width: 400px; /* App.css se match karta hua */
+    height: 240px; /* Responsive height, aap adjust kar sakte hain */
+    margin-top: 28px; /* App.css se match karta hua */
+  }
+
+  .country-details.shimmer-active .country-detail {
+    width: 100%; /* Detail section bhi full width */
+    max-height: none; /* Saare items ek hi column mein aa jayenge, wrapping ki zaroorat nahin */
+    flex-wrap: nowrap; /* Wrapping band kar dein */
+    align-content: stretch; /* Default */
+  }
+
+  /* Responsive mein text placeholders ki width ko adjust kar sakte hain agar zaroorat ho */
+  .country-details.shimmer-active .country-detail .country-name.shimmer {
+    width: 70%;
+  }
+  .country-details.shimmer-active .country-detail .country-population.shimmer {
+    width: 85%;
+  }
+  .country-details.shimmer-active .country-detail .country-region.shimmer {
+    width: 65%;
+  }
+  .country-details.shimmer-active .country-detail .country-subRegion.shimmer {
+    width: 75%;
+  }
+  .country-details.shimmer-active .country-detail .country-capital.shimmer {
+    width: 60%;
+  }
+  .country-details.shimmer-active
+    .country-detail
+    .country-top-level-domain.shimmer {
+    width: 90%;
+  }
+  .country-details.shimmer-active .country-detail .country-currencies.shimmer {
+    width: 70%;
+  }
+  .country-details.shimmer-active .country-detail .country-language.shimmer {
+    width: 80%;
+  }
+}
