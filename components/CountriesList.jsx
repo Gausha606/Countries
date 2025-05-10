@@ -38,7 +38,6 @@ export default function CountriesList({ query }) {
               
             );
           })}
-          {console.log(query)}
       </div>
     </>
   );
