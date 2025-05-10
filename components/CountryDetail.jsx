@@ -104,7 +104,7 @@ export default function CountryDetail() {
                 </p>
                 <p>
                   <b>Capital: </b>
-                  <span className="capital">{countryData.capital?.join(", ")}</span>
+                  <span className="capital">{countryData.capital}</span>
                 </p>
                 <p>
                   <b>Top Level Domain: </b>
