@@ -5,7 +5,7 @@ import CountriesListShimmer from "./CountriesListShimmer";
 export default function CountriesList({ query }) {
   const [allCountries, setAllCountries] = useState([]);
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
+    fetch("https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region,subregion,tld,currencies,languages,borders")
       .then((res) => res.json())
       .then((data) => {
         setAllCountries(data);
