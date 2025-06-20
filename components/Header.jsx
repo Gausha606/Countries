@@ -1,7 +1,8 @@
 import useTheme from "../Hooks/useTheme";
+import './Header.css'
 
 const Header = () => {
-  const [isDark, setIsDark] = useTheme();
+  const [isDark, setIsDark] = useTheme("true");
 
   // if(isDark){
   //   document.body.classList.add('dark')
@@ -18,13 +19,38 @@ const Header = () => {
         <p
           className="theme-changer"
           onClick={() => {
-            setIsDark(!isDark);
+            // setIsDark(!isDark);
             localStorage.setItem("isDarkMode", !isDark);
           }}
-        >
-          <i className={`fa-regular fa-${isDark ? "sun" : "moon"}`} />
-          &nbsp;&nbsp;{isDark ? "Light" : "Dark"} Mode
+        ><label htmlFor="theme" className="theme">
+          <span className="theme__toggle-wrap">
+            <input
+              id="theme"
+              className="theme__toggle w-[1200px] "
+              type="checkbox"
+              role="switch"
+              name="theme"
+              value="dark"
+              onChange={()=>setIsDark(!isDark)}
+            />
+            <span className="theme__fill"></span>
+            <span className="theme__icon ">
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+            </span>
+          </span>
+        </label>
+          {/* <i className={`fa-regular fa-${isDark ? "sun" : "moon"}`} />
+          &nbsp;&nbsp;{isDark ? "Light" : "Dark"} Mode */}
         </p>
+        
       </div>
     </header>
   );
@@ -57,10 +83,10 @@ export default Header;
 //   const [theme, setTheme] = useState(getInitialTheme);
 
 //   useEffect(() => {
-//     // Yeh effect client-side par hi body class aur localStorage update karega
+//     // Yeh effect client-side par hi body className aur localStorage update karega
 //     if (typeof window !== 'undefined') {
 //       document.body.classList.remove("dark", "light"); // Pehle ki classes hata dein
-//       document.body.classList.add(theme); // Current theme class lagayein ('dark' ya 'light')
+//       document.body.classList.add(theme); // Current theme className lagayein ('dark' ya 'light')
 //       localStorage.setItem("theme", theme); // Theme ko localStorage mein save karein
 //     }
 //   }, [theme]); // Yeh tab chalega jab 'theme' state badlegi
