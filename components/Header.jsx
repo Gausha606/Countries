@@ -4,11 +4,11 @@ import './Header.css'
 const Header = () => {
   const [isDark, setIsDark] = useTheme("true");
 
-  // if(isDark){
-  //   document.body.classList.add('dark')
-  // }else{
-  //   document.body.classList.remove('dark')
-  // }
+  if(isDark){
+    document.body.classList.add('dark')
+  }else{
+    document.body.classList.remove('dark')
+  }
 
   return (
     <header className={`header-container ${isDark ? "dark" : ""}`}>
@@ -19,36 +19,12 @@ const Header = () => {
         <p
           className="theme-changer"
           onClick={() => {
-            // setIsDark(!isDark);
+            setIsDark(!isDark);
             localStorage.setItem("isDarkMode", !isDark);
           }}
-        ><label htmlFor="theme" className="theme">
-          <span className="theme__toggle-wrap">
-            <input
-              id="theme"
-              className="theme__toggle w-[1200px] "
-              type="checkbox"
-              role="switch"
-              name="theme"
-              value="dark"
-              onChange={()=>setIsDark(!isDark)}
-            />
-            <span className="theme__fill"></span>
-            <span className="theme__icon ">
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-            </span>
-          </span>
-        </label>
-          {/* <i className={`fa-regular fa-${isDark ? "sun" : "moon"}`} />
-          &nbsp;&nbsp;{isDark ? "Light" : "Dark"} Mode */}
+        >
+          <i className={`fa-regular fa-${isDark ? "sun" : "moon"}`} />
+          &nbsp;&nbsp;{isDark ? "Light" : "Dark"} Mode
         </p>
         
       </div>
